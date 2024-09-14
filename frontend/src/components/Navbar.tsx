@@ -15,7 +15,13 @@ const Navbar = () => {
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center">
       <Link className="flex items-center justify-center" to={location.pathname.includes('dashboard') ? location.pathname : "/"}>
-        <img src="../assets/logo.svg" alt="logo"/>
+        <img src="https://i.ibb.co/q555Y2p/Screenshot-from-2024-09-14-14-29-32-removebg-preview.png" className="
+        h-8
+        w-8
+        sm:h-10
+        sm:w-10
+        
+        " alt="logo"/>
       </Link>
       {location.pathname.includes("dashboard") && (<div className="relative ml-10">
         <Input type="search" placeholder="Search products..." className="pl-10" />
