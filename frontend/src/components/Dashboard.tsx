@@ -27,21 +27,8 @@ const Dashboard = () => {
       <div className="min-h-screen bg-gray-100">
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">TechGear Shop</h1>
             <div className="flex items-center">
-              <div className="relative mr-4">
-                <Input type="search" placeholder="Search products..." className="pl-10" />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              </div>
-              <Button variant="outline" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {cartItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItems}
-                  </span>
-                )}
-              </Button>
-            </div>
+                          </div>
           </div>
         </header>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

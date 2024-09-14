@@ -88,5 +88,5 @@ export default function SellerDashboard() {
       </div>
     )
   }
-  else { <Navigate to={"/auth/v1/login"}/> }
+  else { <Navigate to={"/auth/v1/login"} /> }
 }
