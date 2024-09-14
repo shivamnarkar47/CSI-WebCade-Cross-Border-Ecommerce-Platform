@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { ReactNode, useEffect, useState } from "react";
 import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getCookie } from "@/lib/getUser";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { requestUrl } from "@/request";
 
 export default function SellerDashboard() {
   const user = getCookie("user");
@@ -26,16 +28,19 @@ export default function SellerDashboard() {
   }
   
   const [orders, setOrders] = useState<Order[]>([]);
+  const navigate = useNavigate();
+  console.log(user)
 
+ 
   useEffect(() => {
     const fetchOrders = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/orders/getOrders");
-        const data = await response.json();
-        setOrders(data);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
+     requestUrl({method:"GET",url:"orders/getOrders"}).then((res)=>{
+          setOrders(res.data);
+        console.log(res.data)
+        }).catch((e)=>{
+        console.log(e)
+      })
+      
     };
 
     fetchOrders();
@@ -44,15 +49,15 @@ export default function SellerDashboard() {
   if (!user) {
     return <Navigate to={"/auth/v1/login"} />;
   }
-
+console.log(user.user.country)
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 dark:bg-black">
       {/* Sidebar */}
-      <aside className="w-64 bg-white p-6 hidden md:block">
+      <aside className="w-64 bg-white p-6 hidden dark:bg-[#111] md:block">
         <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
         <nav>
-          <a href="#" className="block py-2 text-gray-600 hover:text-gray-800">Order list</a>
-          <a href="#" className="block py-2 text-gray-600 hover:text-gray-800">Product list</a>
+          <a href="#" className="block py-2 text-gray-600 dark:text-white hover:text-gray-800">Order list</a>
+          <a href="#" className="block py-2 text-gray-600  dark:text-white hover:text-gray-800">Product list</a>
         </nav>
       </aside>
 
@@ -75,7 +80,7 @@ export default function SellerDashboard() {
               <TableHead>Product ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Price</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>Type of Payment</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Count In Stock</TableHead>
             </TableRow>
@@ -85,15 +90,17 @@ export default function SellerDashboard() {
               orders.map((order, index) => (
                 <TableRow key={index}>
                   <TableCell>{order._id}</TableCell>
-                  <TableCell>{order.qty}</TableCell>
-                  <TableCell>{order.price}</TableCell>
-                  <TableCell>{order.category}</TableCell>
-                  <TableCell>{order.countInStock}</TableCell>
-                  <TableCell>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                      {order.status}
-                    </span>
-                  </TableCell>
+                  <TableCell>{order.orderItems.map((or)=>{return or.name+" "})}</TableCell>
+                  <TableCell>{user.user.country === 'japan' ? "¥"+order.itemsPrice/0.596 : (user.user.country === 'eu' ? "EUR "+order.itemsPrice/93 : "Rs "+order.itemsPrice)}</TableCell>
+                  <TableCell>{order.paymentMethod}</TableCell>
+                  <TableCell>{order.createdAt}</TableCell>
+                  <TableCell> {order.orderItems.map((or)=>{return or.qty+" "})} </TableCell>
+                  {/* <TableCell>{order.}</TableCell> */}
+                  {/* <TableCell> */}
+                  {/*   <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> */}
+                  {/*     {order.status} */}
+                  {/*   </span> */}
+                  {/* </TableCell> */}
 
                 </TableRow>
               ))

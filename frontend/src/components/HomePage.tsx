@@ -37,6 +37,7 @@ export default function HomePage() {
     fetchData();
   }, []);
 
+
   return (
     <div className="flex flex-col min-h-screen items-center">
       <main className="flex-1 w-full">
@@ -58,13 +59,13 @@ export default function HomePage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button variant="outline">Learn More</Button>
+                <Button variant="outline" >Learn More</Button>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-black">
           <div className=" px-4 md:px-6 flex flex-col items-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-8">
               Featured Products
@@ -79,7 +80,6 @@ export default function HomePage() {
                       height="300"
                       src={product.image || `/placeholder.svg?height=300&width=300`}
                       style={{ aspectRatio: "300/300", objectFit: "cover" }}
-                      width="300"
                     />
                   </CardHeader>
                   <CardContent>
@@ -96,7 +96,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-black">
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">

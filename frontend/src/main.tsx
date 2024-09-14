@@ -11,6 +11,7 @@ import AuthPage from './components/Auth.tsx';
 import SellerAuth from './components/SellerAuth.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import SellerDashboard from './components/SellerDashboard.tsx';
+import PaymentGate from './components/PaymentGate.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,14 +35,19 @@ const router = createBrowserRouter([
       },
       {
         path: "seller/dashboard/:id",
-        element:<SellerDashboard/>
+        element: <SellerDashboard />
+      },
+      {
+        path: "payment",
+        element: <PaymentGate />
       }
+
     ]
   },
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <RouterProvider router={router}  />
+    <RouterProvider router={router} />
   </StrictMode>,
 )

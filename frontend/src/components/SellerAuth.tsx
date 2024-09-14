@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -58,7 +58,7 @@ export default function SellerAuth() {
     requestUrl({ method: "POST", url: "users/registerUser", data: formData }).then((res) => {
       console.log(res.data);
       Cookies.set('user', JSON.stringify(res.data), { expires: 7, secure: true, sameSite: 'Strict' });
-      navigate(`/dashboard/${res.data.user._id}`)
+      navigate(`/seller/dashboard/${res.data.user._id}`)
     })
   }
 

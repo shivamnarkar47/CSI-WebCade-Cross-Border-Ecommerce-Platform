@@ -2,10 +2,10 @@ import bcrypt from 'bcryptjs';
 import User from '../Models/user.model.js';
 
 export const createUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, country } = req.body;
   try {
     const user
-      = await User.create({ name, email, password: bcrypt.hashSync(password, 8), role });
+      = await User.create({ name, email, password: bcrypt.hashSync(password, 8), role, country });
     res.status(201).json({ user });
   }
   catch (error) {
