@@ -40,8 +40,8 @@ const Dashboard = () => {
   const user = getCookie('user')
   if (user !== null) {
     return (
-      <div className="min-h-screen bg-gray-100">
-        <header className="bg-white shadow-sm">
+      <div className="min-h-screen bg-gray-100 dark:bg-black" >
+        <header className="bg-white dark:bg-black shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center">
                           </div>
