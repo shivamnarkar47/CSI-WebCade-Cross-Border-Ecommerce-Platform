@@ -70,7 +70,7 @@ export default function SellerAuth() {
     requestUrl({ method: "POST", url: "users/loginUser", data: loginformData }).then((res) => {
       console.log(res.data);
       Cookies.set('user', JSON.stringify(res.data), { expires: 7, secure: true, sameSite: 'Strict' });
-      navigate(`/dashboard/${res.data.user._id}`)
+      navigate(`/seller/dashboard/${res.data.user._id}`)
     })
   }
 
@@ -92,11 +92,11 @@ export default function SellerAuth() {
                 <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="login-email">Email</Label>
-                    <Input id="login-email" type="email" placeholder="Enter your email" required onChange={handleLoginChange} />
+                    <Input id="login-email" type="email" name='email' placeholder="Enter your email" required onChange={handleLoginChange} />
                   </div>
                   <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="login-password">Password</Label>
-                    <Input id="login-password" type="password" placeholder="Enter your password" required onChange={handleLoginChange} />
+                    <Input id="login-password" type="password" name='password' placeholder="Enter your password" required onChange={handleLoginChange} />
                   </div>
                 </div>
               </form>
