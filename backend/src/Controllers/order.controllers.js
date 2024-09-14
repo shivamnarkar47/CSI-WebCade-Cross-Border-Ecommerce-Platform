@@ -1,25 +1,27 @@
 import Order from '../Models/order.model.js';
 import Product from '../Models/product.model.js';
 
+
+
 export const createOrder = async (req, res) => {
     const {
         orderItems,
+        user,
         shippingAddress,
         paymentMethod,
         itemsPrice,
         shippingPrice,
         taxPrice,
-        totalPrice,
+        totalPrice = 0,
     } = req.body;
 
-    if (orderItems && orderItems.length === 0) {
+    if (!orderItems && orderItems.length === 0) {
         res.status(400);
         throw new Error('No order items');
-        return;
     } else {
         const order = new Order({
             orderItems,
-            user: req.user._id,
+            user,
             shippingAddress,
             paymentMethod,
             itemsPrice,
@@ -27,10 +29,10 @@ export const createOrder = async (req, res) => {
             taxPrice,
             totalPrice,
         });
-
+        
         const createdOrder = await order.save();
-
-        res.status(201).json(createdOrder);
+ 
+        return res.status(201).json(createdOrder);
     }
 }
 
@@ -129,52 +131,6 @@ export const deleteOrder = async (req, res) => {
     if (order) {
         await order.remove();
         res.json({ message: 'Order removed' });
-    } else {
-        res.status(404);
-        throw new Error('Order not found');
-    }
-}
-
-export const updateOrder = async (req, res) => {
-    const {
-        orderItems,
-        shippingAddress,
-        paymentMethod,
-        itemsPrice,
-        shippingPrice,
-        taxPrice,
-        totalPrice,
-    } = req.body;
-
-    const order = await Order.findById(req.params.id);
-
-    if (order) {
-        order.orderItems = orderItems;
-        order.shippingAddress = shippingAddress;
-        order.paymentMethod = paymentMethod;
-        order.itemsPrice = itemsPrice;
-        order.shippingPrice = shippingPrice;
-        order.taxPrice = taxPrice;
-        order.totalPrice = totalPrice;
-
-        const updatedOrder = await order.save();
-
-        res.json(updatedOrder);
-    } else {
-        res.status(404);
-        throw new Error('Order not found');
-    }
-}
-
-export const deleteOrderItem = async (req, res) => {
-    const order = await Order.findById(req.params.id);
-
-    if (order) {
-        order.orderItems = order.orderItems.filter((item) => item._id.toString() !== req.params.itemId);
-
-        const updatedOrder = await order.save();
-
-        res.json(updatedOrder);
     } else {
         res.status(404);
         throw new Error('Order not found');

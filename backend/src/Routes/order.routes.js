@@ -12,7 +12,7 @@ import { createOrder,
 
 const router = express.Router();
 
-router.post('/create', createOrder);
+router.post('/createOrder', createOrder);
 router.get('/getOrders', getOrders);
 router.get('/getMyOrders', getMyOrders);
 router.put('/update/:id', updateOrderToDelivered);
