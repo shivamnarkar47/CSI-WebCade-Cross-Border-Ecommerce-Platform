@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
     soldBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User,
-        required: true,
+        required: true, 
     }
 }, {
     timestamps: true,
