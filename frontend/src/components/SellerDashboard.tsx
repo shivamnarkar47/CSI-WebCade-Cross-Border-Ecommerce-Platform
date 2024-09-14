@@ -26,21 +26,21 @@ export default function SellerDashboard() {
     date: string;
     status: string;
   }
-  
+
   const [orders, setOrders] = useState<Order[]>([]);
   const navigate = useNavigate();
   console.log(user)
 
- 
+
   useEffect(() => {
     const fetchOrders = async () => {
-     requestUrl({method:"GET",url:"orders/getOrders"}).then((res)=>{
-          setOrders(res.data);
+      requestUrl({ method: "GET", url: "orders/getOrders" }).then((res) => {
+        setOrders(res.data);
         console.log(res.data)
-        }).catch((e)=>{
+      }).catch((e) => {
         console.log(e)
       })
-      
+
     };
 
     fetchOrders();
@@ -49,7 +49,7 @@ export default function SellerDashboard() {
   if (!user) {
     return <Navigate to={"/auth/v1/login"} />;
   }
-console.log(user.user.country)
+  console.log(user.user.country)
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-black">
       {/* Sidebar */}
@@ -90,18 +90,11 @@ console.log(user.user.country)
               orders.map((order, index) => (
                 <TableRow key={index}>
                   <TableCell>{order._id}</TableCell>
-                  <TableCell>{order.orderItems.map((or)=>{return or.name+" "})}</TableCell>
-                  <TableCell>{user.user.country === 'japan' ? "¥"+order.itemsPrice/0.596 : (user.user.country === 'eu' ? "EUR "+order.itemsPrice/93 : "Rs "+order.itemsPrice)}</TableCell>
+                  <TableCell>{order.orderItems.map((or) => { return or.name + " " })}</TableCell>
+                  <TableCell>{user.user.country === 'japan' ? "¥" + order.itemsPrice / 0.596 : (user.user.country === 'eu' ? "EUR " + order.itemsPrice / 93 : "Rs " + order.itemsPrice)}</TableCell>
                   <TableCell>{order.paymentMethod}</TableCell>
                   <TableCell>{order.createdAt}</TableCell>
-                  <TableCell> {order.orderItems.map((or)=>{return or.qty+" "})} </TableCell>
-                  {/* <TableCell>{order.}</TableCell> */}
-                  {/* <TableCell> */}
-                  {/*   <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> */}
-                  {/*     {order.status} */}
-                  {/*   </span> */}
-                  {/* </TableCell> */}
-
+                  <TableCell> {order.orderItems.map((or) => { return or.qty + " " })} </TableCell>
                 </TableRow>
               ))
             ) : (

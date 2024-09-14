@@ -88,7 +88,6 @@ export default function HomePage() {
                   </CardContent>
                   <CardFooter className="flex justify-between">
                     <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
-                    <Button variant="outline">Add to Cart</Button>
                   </CardFooter>
                 </Card>
               ))}
