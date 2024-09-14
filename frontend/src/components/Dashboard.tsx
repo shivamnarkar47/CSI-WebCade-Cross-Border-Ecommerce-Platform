@@ -1,6 +1,5 @@
 import { getCookie } from '@/lib/getUser'
-import React from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -38,6 +37,7 @@ const Dashboard = () => {
     setCartItems(cartItems + 1)
   }
   const user = getCookie('user')
+  const navigate = useNavigate();
   if (user !== null) {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-black" >
@@ -50,7 +50,7 @@ const Dashboard = () => {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.map((product) => (
-              <Card key={product._id}>
+              <Card key={product._id} className='cursor-pointer' onClick={()=>navigate(`/${product._id}`)}>
                 <CardHeader>
                   <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
                 </CardHeader>

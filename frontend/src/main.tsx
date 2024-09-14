@@ -12,6 +12,7 @@ import SellerAuth from './components/SellerAuth.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import SellerDashboard from './components/SellerDashboard.tsx';
 import PaymentGate from './components/PaymentGate.tsx';
+import ProductDashboard from './components/ProductDashboard.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
         element: <SellerAuth />
       },
       {
-        path: "dashboard/:id",
-        element: <Dashboard />
+        path: "dashboard/:id/",
+        element: <Dashboard />,
+      },
+      {
+        path: ":productId",
+        element: <ProductDashboard />
       },
       {
         path: "seller/dashboard/:id",
